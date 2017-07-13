@@ -3,6 +3,8 @@
 mkdir deps &> /dev/null
 cd deps
 
+sudo apt-get install -y software-properties-common
+
 #Add necessary extra repos
 version=$(lsb_release -a 2>&1)
 if [[ $version == *"14.04"* ]] ; then
@@ -23,7 +25,7 @@ else
     exit
 fi
 
-sudo apt-get install -y cmake-qt-gui git build-essential libusb-1.0-0-dev libudev-dev openjdk-7-jdk freeglut3-dev python-vtk libvtk-java libglew-dev cuda-7-5 libsuitesparse-dev
+sudo apt-get install -y cmake-qt-gui git build-essential libusb-1.0-0-dev libudev-dev openjdk-7-jdk freeglut3-dev python-vtk libvtk-java libglew-dev cuda-7-5 libsuitesparse-dev unzip
 
 #Installing Pangolin
 git clone https://github.com/stevenlovegrove/Pangolin.git
@@ -40,7 +42,7 @@ if [[ $version == *"15.04"* ]] ; then
     cd OpenNI2
     make -j8
     cd ..
-    
+
     #15.04 needs ffmpeg to stop OpenCVs build dying, otherwise DBoW won't build (which also won't build with OpenCV3, hurray dependencies!)
     git clone git://source.ffmpeg.org/ffmpeg.git
     cd ffmpeg/
